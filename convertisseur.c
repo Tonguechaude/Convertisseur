@@ -19,19 +19,19 @@ void conversion_Title(void); // title for all conversion outputs
 void tryAgain(int);          // try Again window 
 
 // Binary Conversion functions 
-void binary_decimal(long int);
-void binary_octal(long int);
-void binary_hexadecimal(long int);
+void binary_decimal(long long);
+void binary_octal(long long);
+void binary_hexadecimal(long long);
 
 // Decimal Conversion functions 
-void decimal_binary(long int);
-void decimal_octal(long int);
-void decimal_hexadecimal(long int);
+void decimal_binary(long long);
+void decimal_octal(long long);
+void decimal_hexadecimal(long long);
 
 // Octal Conversion functions 
-void octal_binary(long int);
-void octal_decimal(long int);
-void octal_hexadecimal(long int);
+void octal_binary(long long);
+void octal_decimal(long long);
+void octal_hexadecimal(long long);
 
 // Hexadecimal Convesion functions 
 void hexadecimal_binary(char []);
@@ -106,8 +106,12 @@ void exitScreen()
 
 void screenCleaner()
 {
-    system("clear");  // clears the output screen use "cls" for win  
-   // flush_stdin();
+   #ifdef _WIN32
+    system("cls"); // windows
+   #else
+    system("clear"); // Unix/Linux
+   #endif
+
 }
 
 void flush_stdin() {
@@ -121,7 +125,7 @@ void userInput(int choice)
 
     if(choice == 1) // Binary input validation code 
     {    
-        long int bi;
+        long long bi;
         int flag = 0;
 
         printf("Enter the binary: ");
@@ -147,7 +151,7 @@ void userInput(int choice)
     }
     else if(choice == 2)  // Decimal input validation code 
     {
-        long int deci;
+        long long deci;
         int flag = 0;
 
         printf("Enter the decimal: ");
@@ -176,7 +180,7 @@ void userInput(int choice)
     }
     else if(choice == 3)  // Octal input validation code 
     {
-        long int octal;
+        long long octal;
         int flag = 0;
 
         printf("Enter the octal: ");
@@ -266,7 +270,8 @@ void userInput(int choice)
 // validation function for each single digit of a number according to conversion condition 
 int digitChecker(int num, int choice)
 {
-    long int rem, temp=0, flag=0;
+    long long rem;
+    long int temp=0, flag=0;
     temp = num;
 
         while(temp != 0)
@@ -325,7 +330,8 @@ void tryAgain(int choice)
 // Binary Conversion functions
 void binary_decimal(long long bi)
 {
-    int rem,sum=0,i=0;
+    long rem,sum=0;
+    int i=0;
 
     while(bi!=0)
     {
@@ -338,10 +344,10 @@ void binary_decimal(long long bi)
     printf("\nDecimal Number: %d",sum);
 }
 
-void binary_octal(long int bi)
+void binary_octal(long long bi)
 {
-    int i=0,rem,sum=0,remain[100],len=0;
-
+    long long rem,sum=0,remain[100];
+    int i=0, len=0;
     while(bi!=0)
     {
         rem=bi%10;
@@ -365,9 +371,10 @@ void binary_octal(long int bi)
     }
 }
 
-void binary_hexadecimal(long int bi)
+void binary_hexadecimal(long long bi)
 {
-    int rem,i=0,sum=0,remain[100],len=0;
+    long long rem, sum=0,remain[100];
+    int i=0, len=0;
 
     while(bi!=0)
     {
@@ -415,9 +422,10 @@ void binary_hexadecimal(long int bi)
 }
 
 // Decimal Conversion functions 
-void decimal_binary(long int deci)
+void decimal_binary(long long deci)
 {
-    int rem[50],i,len=0;
+    long long rem[50];
+    int i,len=0;
 
     do
     {
@@ -435,9 +443,10 @@ void decimal_binary(long int deci)
     }
 }
 
-void decimal_octal(long int deci)
+void decimal_octal(long long deci)
 {
-    int rem[50],i,len=0;
+    long long rem[50];
+    int i,len=0;
 
     do
     {
@@ -455,9 +464,10 @@ void decimal_octal(long int deci)
     }
 }
 
-void decimal_hexadecimal(long int deci)
+void decimal_hexadecimal(long long deci)
 {
-    int rem[50],i,len=0;
+    long long rem[50];
+    int i,len=0;
 
     do
     {
@@ -498,9 +508,10 @@ void decimal_hexadecimal(long int deci)
 }
 
 // Octal Conversion functions 
-void octal_binary(long int oct)
+void octal_binary(long long oct)
 {
-    int rem[50],len=0,decimal=0,i=0,num,ans;
+    long long rem[50], decimal=0, num, ans;
+    int len=0, i=0;
 
     while(oct!=0)
     {
@@ -527,7 +538,7 @@ void octal_binary(long int oct)
     }
 }
 
-void octal_decimal(long int oct)
+void octal_decimal(long long oct)
 {
     int decimal=0,i=0,num,ans;
 
@@ -541,9 +552,11 @@ void octal_decimal(long int oct)
     printf("\nDecimal Number: %d",decimal);
 }
 
-void octal_hexadecimal(long int oct)
+void octal_hexadecimal(long long oct)
 {
-    int rem[50],len=0,decimal=0,i=0,num,ans=0;
+    long long rem[50], decimal=0, num, ans=0;
+    int len=0, i=0;
+
     while(oct!=0)
     {
         ans=oct % 10;
@@ -664,7 +677,8 @@ void hexadecimal_binary(char hexa[])
 
 void hexadecimal_octal(char hexa[])
 {
-    int i,len,num=0,power=0,decimal=0,rem[100];
+    long long num=0,power=0,decimal=0,rem[100];
+    int i, len;
 
     for(i=strlen(hexa)-1;i>=0;i--)
     {
@@ -705,7 +719,8 @@ void hexadecimal_octal(char hexa[])
 
 void hexadecimal_decimal(char hexa[])
 {
-    int i,num=0,power=0,decimal=0;
+    long long num=0,power=0,decimal=0;
+    int i;
 
     for(i=strlen(hexa)-1;i>=0;i--)
     {
