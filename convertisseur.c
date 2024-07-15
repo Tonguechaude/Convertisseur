@@ -323,15 +323,15 @@ void tryAgain(int choice)
 }
 
 // Binary Conversion functions
-void binary_decimal(long int bi)
+void binary_decimal(long long bi)
 {
     int rem,sum=0,i=0;
 
     while(bi!=0)
     {
-        rem=bi%10;
-        bi=bi/10;
-        sum=sum+rem*pow(2,i);
+        rem = bi % 10;
+        bi /= 10;
+        sum += rem * pow(2,i);
         i++;
     }
     
