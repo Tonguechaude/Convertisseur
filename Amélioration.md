@@ -42,16 +42,3 @@ Actuellement, le programme utilise des types de données comme long int qui peuv
 
 Pour une expérience utilisateur améliorée, envisage de créer une interface graphique simple en utilisant des bibliothèques comme Qt ou GTK+.
 Exemple de Code Révisé
-
-Voici un exemple de fonction de nettoyage de l'écran adapté pour fonctionner sur plusieurs plateformes :
-
-c
-
-void screenCleaner()
-{
-#ifdef _WIN32
-system("cls");
-#else
-system("clear");
-#endif
-}
