@@ -424,19 +424,31 @@ void binary_hexadecimal(long long bi)
 // Decimal Conversion functions
 void decimal_binary(int deci)
 {
-    long double bin = 0;
-    int rem, i = 1;
+    char bin[65];
+    int rem, i = 0;
+
+    if (deci == 0) {
+        printf("\nBinary Number: 0");
+        return;
+    }
 
     while (deci != 0)
     {
         rem = deci % 2;
         deci /= 2;
-        bin += rem * i;
-        i *= 10;
+        bin[i++] = rem + '0';  // Convertir le bit en caractère '0' ou '1'
     }
 
-    printf("\nBinary Number: ");
-    printf("%ld", bin);
+    bin[i] = '\0';
+
+    // Inverser la chaîne pour obtenir le binaire dans le bon ordre
+    for (int j = 0; j < i / 2; j++) {
+        char temp = bin[j];
+        bin[j] = bin[i - j - 1];
+        bin[i - j - 1] = temp;
+    }
+
+    printf("\nBinary Number: %s", bin);
 }
 
 void decimal_octal(int deci)
