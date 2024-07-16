@@ -1,0 +1,1 @@
+docker build -t convertisseur-image . && docker run --rm -it convertisseur-image
