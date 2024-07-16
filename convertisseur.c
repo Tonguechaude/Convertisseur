@@ -114,11 +114,6 @@ void screenCleaner()
 
 }
 
-void flush_stdin() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF); // Lire et jeter les caractères jusqu'à la fin de la ligne ou la fin du fichier
-}
-
 void userInput(int choice)
 {
     screenCleaner();
@@ -204,65 +199,40 @@ void userInput(int choice)
             tryAgain(choice);
         }
     }
-    else if(choice == 4)  // HexaDecimal input validation code
-    {
-        char hexa[50];
-        char ch;
-        int i=0, j=0, k=0, flag=0;
-
-        printf("Enter the hexadecimal: ");
-
-        while(1)
+    else if(choice == 4)  // Hexadecimal input validation code
         {
-            ch = getch();
-            if(ch == ENTER || ch == TAB)
+            char hexa[50];
+            int flag = 0;
+
+            printf("Enter the hexadecimal: ");
+            scanf("%s", hexa);
+
+            for(int j = 0; hexa[j] != '\0'; j++)
             {
-                hexa[i] = '\0';
-                break;
-            }
-            else if(ch == BKSP)
-            {
-                if(i > 0)
+                if(!isxdigit(hexa[j]))
                 {
-                    i--;
-                    printf("\b \b"); // for backspace
+                    flag = 1;
+                    break;
                 }
             }
+
+            if(flag == 1)
+            {
+                printf("\n\nError: Hexadecimal digits can only be between 0 to 9 & A to F. \n");
+                printf("Press any key to continue... \n");
+                getchar(); // Pour capturer le retour après l'erreur
+                welcomeScreen();
+            }
             else
             {
-                hexa[i++] = ch;
-                printf("%c", ch);
+                printf("\n");
+                conversion_Title();
+                hexadecimal_binary(hexa);
+                hexadecimal_octal(hexa);
+                hexadecimal_decimal(hexa);
+                tryAgain(choice);
             }
         }
-
-        for(j=0; j<i; j++)
-        {
-            if((hexa[j] >= 'A' && hexa[j] <= 'F') || (hexa[j] >= 'a' && hexa[j] <= 'f') || isdigit(hexa[j]))
-                k++;
-            else
-            {
-                flag = 1;
-                break;
-            }
-        }
-
-        if(flag == 1)
-        {
-            printf("\n\nError: Hexadecimal digits can only be between 0 to 9 & A to F. \n");
-            printf("Press any key to continue... \n");
-            getch();
-            welcomeScreen();
-        }
-        else
-        {
-            printf("\n");
-            conversion_Title();
-            hexadecimal_binary(hexa);
-            hexadecimal_octal(hexa);
-            hexadecimal_decimal(hexa);
-            tryAgain(choice);
-        }
-    }
     else  // Very rare case message
         printf("\n>> Unexpected Error occured. Report to program Administrator << \n");
 }
