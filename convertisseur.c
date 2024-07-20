@@ -34,6 +34,8 @@ void hexadecimal_binary(char []);
 void hexadecimal_octal(char []);
 void hexadecimal_decimal(char []);
 
+void resetColor();
+
 void main()
 {
     welcomeScreen();
@@ -46,16 +48,21 @@ void welcomeScreen()
 
 label1:
     screenCleaner();
+    printf("\033[1;36m"); // Cyan
     printf("-------------------------------------------\n");
     printf(">>> Welcome to Number System Converter <<< \n");
     printf("-------------------------------------------\n\n");
+    resetColor();
 
+    printf("\033[1;32m"); // Vert
     printf(">> Select Conversion Type: \n");
     printf("> 1. Binary Conversion \n");
     printf("> 2. Decimal Conversion \n");
     printf("> 3. Octal Conversion \n");
     printf("> 4. Hexadecimal Conversion \n");
     printf("> 5. Exit the Program \n\n");
+    resetColor();
+
     printf("Enter the number & Hit ENTER: ");
     scanf("%d", &choice);
 
@@ -78,7 +85,7 @@ label1:
             exitScreen();
             break;
         default:
-            printf("\nError: the number must be between 1 to 5.\n");
+            printf("\n\033[1;31mError: the number must be between 1 to 5.\n");
             printf("Press any key to continue... \n");
             getch();
             goto label1;
@@ -89,9 +96,11 @@ label1:
 void exitScreen()
 {
     screenCleaner();
+    printf("\033[1;33m"); // Jaune
     printf("-------------------------------------------\n");
     printf(" >>> Creator : Tonguechaude <<< \n");
     printf("-------------------------------------------\n\n");
+    resetColor();
 
     printf("> GitHub: https://github.com/Tonguechaude \n");
     printf("> LinkedIn: https://www.linkedin.com/in/ \n\n");
@@ -261,9 +270,11 @@ int digitChecker(int num, int choice)
 // titre pour les sorties de toutes les conversions
 void conversion_Title()
 {
+    printf("\033[1;35m"); // Magenta
     printf("\n---------------------------\n");
     printf(">>> Conversion Results <<< \n");
     printf("---------------------------\n");
+    resetColor();
 }
 
 // fenêtre try Again
@@ -285,8 +296,9 @@ void tryAgain(int choice)
             welcomeScreen();
             break;
         default:
-            printf("\nError: invalid input. \n");
+            printf("\n\033[1;31mError: invalid input. \n");
             printf("Press any key to continue... \n");
+            resetColor();
             getch();
             welcomeScreen();
     }
@@ -719,4 +731,10 @@ void hexadecimal_decimal(char hexa[])
         power++;
     }
     printf("\nDecimal Number: %d",decimal);
+}
+
+// fonction pour reset la couleur
+void resetColor()
+{
+    printf("\033[0m");
 }

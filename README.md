@@ -46,13 +46,13 @@ Ouvrez un terminal et naviguez jusqu'au répertoire contenant votre Dockerfile e
 Construisez l'image Docker avec la commande suivante :
 
 ```sh
-docker build -t convertisseur-image .
+docker build -t convertisseur-image:1.0.0 .
 ```
 
 Exécutez le conteneur Docker avec la commande suivante :
 
 ```sh
-    docker run --rm -it convertisseur-image
+    docker run --rm -it convertisseur-image:1.0.0
 ```
 
 Cette commande compile le programme à l'intérieur du conteneur Docker et exécute le binaire généré. 
