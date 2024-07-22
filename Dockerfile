@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /usr/src/convertisseur
 
 # Copie les fichiers sources dans le conteneur
-COPY . .
+COPY . /usr/src/convertisseur
 
 # Compile le programme
 RUN gcc -o convertisseur convertisseur.c -lncurses -lm

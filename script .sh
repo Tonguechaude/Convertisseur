@@ -1,1 +1,1 @@
-docker build -t convertisseur-image . && docker run --rm -it convertisseur-image
+docker build -t convertisseur-image . && docker run --rm -it convertisseur-image:1.0.0
